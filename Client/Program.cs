@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using ClientClassNamespace;
 
 namespace Client
 {
@@ -7,7 +8,10 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            Connect("127.0.0.1", "String message");
+            //Connect("127.0.0.1", "String message");
+
+            ClientClass client = new ClientClass("127.0.0.1", 13000);
+            client.Connect();
         }
 
         // Functions:
