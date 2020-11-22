@@ -29,11 +29,17 @@ namespace ClientClassNamespace
             _stream.Write(data, 0, data.Length);
         }
 
+        public event Action<string> OnMessageReceived;
+
         private void StartListening()
         {
             _listeningThread = new Thread(() => 
             {
-                
+                byte[] data = new byte[256];
+                Int32 bytes = _stream.Read(data, 0, data.Length);
+                string message = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+
+                OnMessageReceived?.Invoke(message);
             });
         }
     }
