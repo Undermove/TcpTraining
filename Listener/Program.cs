@@ -7,10 +7,12 @@ namespace Listener
 {
     class Program
     {
-        // Functions:
+        // Listener Functions:
         // Start()
-        // StartWaitingForConnections()
+        // (priv) StartWaitingForConnections()
         // (priv) AddNewConnection()
+        // (priv) StopWaitingForConnections()
+        // Stop()
 
         static void Main(string[] args)
         {
