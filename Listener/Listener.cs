@@ -13,6 +13,7 @@ namespace ListenerNamespace
             IPAddress localAddr = IPAddress.Parse("127.0.0.1");
             _server = new TcpListener(localAddr, port);
             _server.Start();
+            StartWaitingForConnections();
         }
 
         private void StartWaitingForConnections()
