@@ -16,8 +16,8 @@ namespace Client
             };
             client.Connect();
             client.SendMessage("Message to server");
-            client.Disconnect();
             Console.ReadLine();
+            client.Disconnect();
         }
 
         // Functions:
