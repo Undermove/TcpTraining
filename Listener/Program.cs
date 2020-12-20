@@ -11,13 +11,15 @@ namespace ListenerNamespace
         // Listener Functions:
         // Start() v
         // (priv) StartWaitingForConnections() v
-        // (priv) AddNewConnection() -
-        // (priv) StopWaitingForConnections()
-        // Stop()
+        // (priv) AddNewConnection() v
+        // (priv) StopWaitingForConnections() v
+        // Stop() v 
         static void Main()
         {
             Listener listener = new Listener();
             listener.Start();
+            Console.ReadLine();
+            listener.Stop();
         }
 
         static void LastMain(string[] args)

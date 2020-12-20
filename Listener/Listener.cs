@@ -3,11 +3,13 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using ClientClassNamespace;
+using System.Threading;
 
 namespace ListenerNamespace
 {
     public class Listener
     {
+        private bool _isListening;
         private TcpListener _server;
         private Dictionary<string, ClientClass> _connectedUsers = new Dictionary<string, ClientClass>();
 
@@ -22,11 +24,15 @@ namespace ListenerNamespace
 
         private void StartWaitingForConnections()
         {
-            while (true)
-            {
-                TcpClient client = _server.AcceptTcpClient();
-                AddNewConnection(client);
-            }
+            _isListening = true;
+            Thread thread = new Thread(() => {
+                while (_isListening)
+                {
+                    TcpClient client = _server.AcceptTcpClient();
+                    AddNewConnection(client);
+                }
+            });
+            thread.Start();
         }
 
         private void AddNewConnection(TcpClient connection)
@@ -51,6 +57,19 @@ namespace ListenerNamespace
             _connectedUsers.Add(connection.Client.RemoteEndPoint.ToString(), user);
         }
 
-        
+        private void StopWaitingForConnections()
+        {
+            _isListening = false;
+        }
+
+        public void Stop()
+        {
+            // StopWaitingForConnections()
+            foreach (var connectedUser in _connectedUsers.Values)
+            {
+                connectedUser.Disconnect();
+            }
+            _server.Stop();
+        }
     }
 }
