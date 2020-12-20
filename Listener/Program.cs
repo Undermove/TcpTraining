@@ -9,9 +9,9 @@ namespace ListenerNamespace
     class Program
     {
         // Listener Functions:
-        // Start()
-        // (priv) StartWaitingForConnections()
-        // (priv) AddNewConnection()
+        // Start() v
+        // (priv) StartWaitingForConnections() v
+        // (priv) AddNewConnection() -
         // (priv) StopWaitingForConnections()
         // Stop()
         static void Main()
@@ -52,8 +52,6 @@ namespace ListenerNamespace
                     
                     #region class User
                     TcpClient client = server.AcceptTcpClient();
-                    ClientClass user = new ClientClass("127.0.0.1", 13000);
-                    user.Connect();
 
                     Thread clientThread = new Thread(() => {
                         // Buffer for reading data

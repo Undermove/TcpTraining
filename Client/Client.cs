@@ -19,9 +19,15 @@ namespace ClientClassNamespace
             _port = port;
         }
 
+        public ClientClass(TcpClient client)
+        {
+            _client = client;
+        }
+
+// можно попробовать создать отдельный метод, который принимает TcpClient
         public void Connect()
         {
-            _client = new TcpClient(_serverAddress, _port);
+            _client = _client ?? new TcpClient(_serverAddress, _port);
             _stream = _client.GetStream();
             StartListening();
         }
@@ -61,7 +67,6 @@ namespace ClientClassNamespace
         {
             StopListen();
             _stream.Close();
-            //_listeningThread.Abort();
             _client.Close();
         }
     }
